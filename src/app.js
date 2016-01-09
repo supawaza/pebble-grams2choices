@@ -6,7 +6,7 @@ var UI = require('ui');
 var Vector2 = require('vector2');
 var window = new UI.Window();
 
-//Add UI elements to the Pebble window
+//Simple function to add UI elements to the Pebble window
 var addElements = function(win, obj) {
 	for (var key in obj) {
   		if (obj.hasOwnProperty(key)) {
