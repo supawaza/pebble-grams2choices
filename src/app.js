@@ -7,8 +7,11 @@ var Vector2 = require('vector2');
 var window = new UI.Window();
 
 var configs = {
-	gram: 5,
-	choice, 0
+	initGram: 5,
+	initChoice: 0,
+	gramShortIncrement: 1,
+	gramLongIncrement: 5,
+	images: ['images/white_arrows.png']
 };
 
 var addElements = function(win, obj) {
@@ -52,7 +55,7 @@ app.choiceText = new UI.Text({
 app.arrows = new UI.Image({
   position: new Vector2(52, 42),
   size: new Vector2(36, 36),
-  image: 'images/white_arrows.png'
+  image: configs.images[0]
 });
 
 app.rect = new UI.Rect({
@@ -61,12 +64,11 @@ app.rect = new UI.Rect({
   backgroundColor: '#a5eab7'
 });
 
-
 app.gramsElement = new UI.Text({
 	position: new Vector2(23, 75),
 	size: new Vector2(144, 30),
 	font: 'gothic-24-bold',
-	text: 5,
+	text: configs.initGram,
 	textAlign: 'left',
 	color: '#333333'
 });
@@ -75,18 +77,18 @@ app.choicesElement = new UI.Text({
 	position: new Vector2(-23, 75),
 	size: new Vector2(144, 30),
 	font: 'gothic-24-bold',
-	text: 0,
+	text: configs.initChoice,
 	textAlign: 'right',
 	color: '#333333'
 });
 
 addElements(window, app);
 
-var gram = 5;
-var choice = 0;
+var gram = configs.initGram;
+var choice = configs.initChoice;
 
-var updateChoices = function(gram, textLabel) {
-	var textElement = app.choicesElement;
+app.updateChoices = function(gram) {
+	var textElement = this.choicesElement;
 
 	if( gram >= 0 && gram <= 5 ){
 		textElement.text(0);
@@ -134,37 +136,37 @@ var updateChoices = function(gram, textLabel) {
 		textElement.text(7);
 
 	}
-}
+};
+
+// EVENTS
 
 window.on('longClick', 'select', function() {
 	gram = 5;
 	app.gramsElement.text(5);
-	updateChoices(gram);
+	app.updateChoices(gram);
 });
 
 window.on('click', 'up', function(e) {
-	app.gramsElement.text(gram+=1);
-	updateChoices(gram);
+	app.gramsElement.text(gram+=configs.gramShortIncrement);
+	app.updateChoices(gram);
 
 });
 
 window.on('longClick', 'up', function() {
-	app.gramsElement.text(gram+=5);
-
-	updateChoices(gram);
+	app.gramsElement.text(gram+=configs.gramLongIncrement);
+	app.updateChoices(gram);
 });
 
 window.on('click', 'down', function() {
 	if(gram > 0) {
-		app.gramsElement.text(gram-=1);
-		updateChoices(gram);
+		app.gramsElement.text(gram-=configs.gramShortIncrement);
+		app.updateChoices(gram);
 	}
 });
 
 window.on('longClick', 'down', function() {
 	if(gram > 0 && gram > 5) {
-		app.gramsElement.text(gram-=5);
-
-		updateChoices(gram);
+		app.gramsElement.text(gram-=configs.gramLongIncrement);
+		app.updateChoices(gram);
 	}
 });
