@@ -6,14 +6,7 @@ var UI = require('ui');
 var Vector2 = require('vector2');
 var window = new UI.Window();
 
-var configs = {
-	initGram: 5,
-	initChoice: 0,
-	gramShortIncrement: 1,
-	gramLongIncrement: 5,
-	images: ['images/white_arrows.png']
-};
-
+//Add UI elements to the Pebble window
 var addElements = function(win, obj) {
 	for (var key in obj) {
   		if (obj.hasOwnProperty(key)) {
@@ -23,8 +16,22 @@ var addElements = function(win, obj) {
 	win.show();
 };
 
+var configs = {
+	initGram: 5,
+	initChoice: 0,
+	numbersTextFont: 'gothic-24-bold',
+	numbersTextColor: '#333333',
+	gramShortIncrement: 1,
+	gramLongIncrement: 5,
+	staticTextFont: 'gothic-18-bold',
+	staticTextColor: 'green',
+	textBg: '#a5eab7',
+	images: ['images/white_arrows.png']
+};
+
 var app = {};
 
+//App Title Text
 app.titleText = new UI.Text({
 	position: new Vector2(0, 5),
 	size: new Vector2(150, 40),
@@ -34,58 +41,65 @@ app.titleText = new UI.Text({
 	color: 'white'
 });
 
+//Static Grams Text
 app.gramText = new UI.Text({
 	position: new Vector2(10, 45),
 	size: new Vector2(150, 30),
-	font: 'gothic-18-bold',
+	font: configs.staticTextFont,
 	text: 'Grams',
 	textAlign: 'left',
 	color: 'green'
 });
 
+//Static Choice Text
 app.choiceText = new UI.Text({
 	position: new Vector2(-10, 45),
 	size: new Vector2(150, 30),
-	font: 'gothic-18-bold',
+	font: configs.staticTextFont,
 	text: 'Choices',
 	textAlign: 'right',
-	color: 'green'
+	color: configs.staticTextColor
 });
 
+//Static Arrows Image
 app.arrows = new UI.Image({
   position: new Vector2(52, 42),
   size: new Vector2(36, 36),
   image: configs.images[0]
 });
 
+//Green background behind the numbers
 app.rect = new UI.Rect({
   position: new Vector2(0, 75),
   size: new Vector2(150, 35),
-  backgroundColor: '#a5eab7'
+  backgroundColor: configs.textBg
 });
 
+//Grams dynamic text element
 app.gramsElement = new UI.Text({
 	position: new Vector2(23, 75),
 	size: new Vector2(144, 30),
-	font: 'gothic-24-bold',
+	font: configs.numbersTextFont,
 	text: configs.initGram,
 	textAlign: 'left',
-	color: '#333333'
+	color: numbersTextColor
 });
 
+//Choices dynamic text element
 app.choicesElement = new UI.Text({
 	position: new Vector2(-23, 75),
 	size: new Vector2(144, 30),
-	font: 'gothic-24-bold',
+	font: configs.numbersTextFont,
 	text: configs.initChoice,
 	textAlign: 'right',
-	color: '#333333'
+	color: numbersTextColor
 });
 
+//Add elements onto the Pebble window
 addElements(window, app);
 
-var gram = configs.initGram;
-var choice = configs.initChoice;
+var gram = configs.initGram,
+	choice = configs.initChoice;
 
 app.updateChoices = function(gram) {
 	var textElement = this.choicesElement;
@@ -134,29 +148,33 @@ app.updateChoices = function(gram) {
 
 	} else {
 		textElement.text(7);
-
 	}
 };
 
-// EVENTS
+/*  EVENTS
+	------------------------------------ */
 
+//Long click the SELECT button to reset
 window.on('longClick', 'select', function() {
-	gram = 5;
-	app.gramsElement.text(5);
+	gram = configs.initGram;
+	app.gramsElement.text(gram);
 	app.updateChoices(gram);
 });
 
+//Single click the UP button will increment Grams of 1
 window.on('click', 'up', function(e) {
 	app.gramsElement.text(gram+=configs.gramShortIncrement);
 	app.updateChoices(gram);
 
 });
 
+//Long clicking the UP button will increment the Grams of 5 (default)
 window.on('longClick', 'up', function() {
 	app.gramsElement.text(gram+=configs.gramLongIncrement);
 	app.updateChoices(gram);
 });
 
+//Single click the DOWN button will decrement Grams of 1
 window.on('click', 'down', function() {
 	if(gram > 0) {
 		app.gramsElement.text(gram-=configs.gramShortIncrement);
@@ -164,6 +182,7 @@ window.on('click', 'down', function() {
 	}
 });
 
+//Long clicking the DOWN button will decrement the Grams of 5 (default)
 window.on('longClick', 'down', function() {
 	if(gram > 0 && gram > 5) {
 		app.gramsElement.text(gram-=configs.gramLongIncrement);
