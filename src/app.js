@@ -5,16 +5,17 @@
 var UI = require('ui');
 var Vector2 = require('vector2');
 var window = new UI.Window();
-var app = {};
 
-function addElements(win, obj) {
+var addElements = function(win, obj) {
 	for (var key in obj) {
   		if (obj.hasOwnProperty(key)) {
 			win.add(obj[key]);
 		}
 	}
 	win.show();
-}
+};
+
+var app = {};
 
 app.titleText = new UI.Text({
 	position: new Vector2(0, 5),
