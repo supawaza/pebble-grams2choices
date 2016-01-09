@@ -16,12 +16,6 @@ function addElements(win, obj) {
 	win.show();
 }
 
-app.configs = {
-	"gram": 5,
-	"choice": 0,
-	"images": ['images/white_arrows.png']
-};
-
 app.titleText = new UI.Text({
 	position: new Vector2(0, 5),
 	size: new Vector2(150, 40),
@@ -52,7 +46,7 @@ app.choiceText = new UI.Text({
 app.arrows = new UI.Image({
   position: new Vector2(52, 42),
   size: new Vector2(36, 36),
-  image: app.configs.images[0];
+  image: 'images/white_arrows.png'
 });
 
 app.rect = new UI.Rect({
@@ -66,7 +60,7 @@ app.gramsElement = new UI.Text({
 	position: new Vector2(23, 75),
 	size: new Vector2(144, 30),
 	font: 'gothic-24-bold',
-	text: app.configs.gram,
+	text: 5,
 	textAlign: 'left',
 	color: '#333333'
 });
@@ -75,12 +69,17 @@ app.choicesElement = new UI.Text({
 	position: new Vector2(-23, 75),
 	size: new Vector2(144, 30),
 	font: 'gothic-24-bold',
-	text: app.configs.choice,
+	text: 0,
 	textAlign: 'right',
 	color: '#333333'
 });
 
-app.updateChoices(gram) {
+addElements(window, app);
+
+var gram = 5;
+var choice = 0;
+
+function updateChoices(gram) {
 	if( gram >= 0 && gram <= 5 ){
 		app.choicesElement.text(0);
 
@@ -129,11 +128,6 @@ app.updateChoices(gram) {
 	}
 }
 
-addElements(window, app);
-
-var gram = app.configs.gram;
-var choice = app.configs.choice;
-
 window.on('longClick', 'select', function() {
 	gram = 5;
 	app.gramsElement.text(5);
@@ -148,13 +142,13 @@ window.on('click', 'up', function(e) {
 
 window.on('longClick', 'up', function() {
 	app.gramsElement.text(gram+=5);
+
 	updateChoices(gram);
 });
 
 window.on('click', 'down', function() {
 	if(gram > 0) {
 		app.gramsElement.text(gram-=1);
-
 		updateChoices(gram);
 	}
 });
@@ -162,6 +156,7 @@ window.on('click', 'down', function() {
 window.on('longClick', 'down', function() {
 	if(gram > 0 && gram > 5) {
 		app.gramsElement.text(gram-=5);
+
 		updateChoices(gram);
 	}
 });
