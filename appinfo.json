@@ -29,14 +29,14 @@
                 "type": "font"
             },
             {
-                "file": "images/arrows_28x28.png",
-                "menuIcon": true,
-                "name": "IMAGES_ARROWS_28X28_PNG",
+                "file": "images/white_arrows.png",
+                "name": "IMAGES_WHITE_ARROWS_PNG",
                 "type": "bitmap"
             },
             {
-                "file": "images/white_arrows.png",
-                "name": "IMAGES_WHITE_ARROWS_PNG",
+                "file": "images/arrows_28x28.png",
+                "menuIcon": true,
+                "name": "IMAGES_ARROWS_28X28_PNG",
                 "type": "bitmap"
             }
         ]

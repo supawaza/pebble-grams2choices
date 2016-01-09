@@ -5,10 +5,16 @@
 var UI = require('ui');
 var Vector2 = require('vector2');
 var window = new UI.Window();
-
 var app = {};
 
-
+function addElements(win, obj) {
+	for (var key in obj) {
+  		if (obj.hasOwnProperty(key)) {
+			win.add(obj[key]);
+		}
+	}
+	win.show();
+}
 
 app.titleText = new UI.Text({
 	position: new Vector2(0, 5),
@@ -68,8 +74,7 @@ app.choicesElement = new UI.Text({
 	color: '#333333'
 });
 
-window.add(app);
-window.show();
+addElements(window, app);
 
 var gram = 5;
 var choice = 0;
