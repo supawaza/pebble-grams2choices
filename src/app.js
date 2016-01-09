@@ -6,7 +6,11 @@ var UI = require('ui');
 var Vector2 = require('vector2');
 var window = new UI.Window();
 
-var titleText = new UI.Text({
+var app = {};
+
+
+
+app.titleText = new UI.Text({
 	position: new Vector2(0, 5),
 	size: new Vector2(150, 40),
 	font: 'gothic-24-bold',
@@ -15,7 +19,7 @@ var titleText = new UI.Text({
 	color: 'white'
 });
 
-var gramText = new UI.Text({
+app.gramText = new UI.Text({
 	position: new Vector2(10, 45),
 	size: new Vector2(150, 30),
 	font: 'gothic-18-bold',
@@ -24,7 +28,7 @@ var gramText = new UI.Text({
 	color: 'green'
 });
 
-var choiceText = new UI.Text({
+app.choiceText = new UI.Text({
 	position: new Vector2(-10, 45),
 	size: new Vector2(150, 30),
 	font: 'gothic-18-bold',
@@ -33,20 +37,20 @@ var choiceText = new UI.Text({
 	color: 'green'
 });
 
-var arrows = new UI.Image({
+app.arrows = new UI.Image({
   position: new Vector2(52, 42),
   size: new Vector2(36, 36),
   image: 'images/white_arrows.png'
 });
 
-var rect = new UI.Rect({
+app.rect = new UI.Rect({
   position: new Vector2(0, 75),
   size: new Vector2(150, 35),
   backgroundColor: '#a5eab7'
 });
 
 
-var gramsElement = new UI.Text({
+app.gramsElement = new UI.Text({
 	position: new Vector2(23, 75),
 	size: new Vector2(144, 30),
 	font: 'gothic-24-bold',
@@ -55,7 +59,7 @@ var gramsElement = new UI.Text({
 	color: '#333333'
 });
 
-var choicesElement = new UI.Text({
+app.choicesElement = new UI.Text({
 	position: new Vector2(-23, 75),
 	size: new Vector2(144, 30),
 	font: 'gothic-24-bold',
@@ -64,17 +68,11 @@ var choicesElement = new UI.Text({
 	color: '#333333'
 });
 
-window.add(titleText);
-window.add(gramText);
-window.add(choiceText);
-window.add(rect);
-window.add(arrows);
-window.add(gramsElement);
-window.add(choicesElement);
+window.add(app);
 window.show();
 
-var gram = parseInt(localStorage.getItem('gram')) || 5;
-var choice = parseInt(localStorage.getItem('choice')) || 0;
+var gram = 5;
+var choice = 0;
 
 function updateChoices(gram) {
 	if( gram >= 0 && gram <= 5 ){
