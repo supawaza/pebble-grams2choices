@@ -82,7 +82,7 @@ app.gramsElement = new UI.Text({
 	font: configs.numbersTextFont,
 	text: configs.initGram,
 	textAlign: 'left',
-	color: numbersTextColor
+	color: configs.numbersTextColor
 });
 
 //Choices dynamic text element
@@ -92,7 +92,7 @@ app.choicesElement = new UI.Text({
 	font: configs.numbersTextFont,
 	text: configs.initChoice,
 	textAlign: 'right',
-	color: numbersTextColor
+	color: configs.numbersTextColor
 });
 
 //Add elements onto the Pebble window
