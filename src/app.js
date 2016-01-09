@@ -16,6 +16,12 @@ function addElements(win, obj) {
 	win.show();
 }
 
+app.configs = {
+	"gram": 5,
+	"choice": 0,
+	"images": ['images/white_arrows.png']
+};
+
 app.titleText = new UI.Text({
 	position: new Vector2(0, 5),
 	size: new Vector2(150, 40),
@@ -46,7 +52,7 @@ app.choiceText = new UI.Text({
 app.arrows = new UI.Image({
   position: new Vector2(52, 42),
   size: new Vector2(36, 36),
-  image: 'images/white_arrows.png'
+  image: app.configs.images[0];
 });
 
 app.rect = new UI.Rect({
@@ -60,7 +66,7 @@ app.gramsElement = new UI.Text({
 	position: new Vector2(23, 75),
 	size: new Vector2(144, 30),
 	font: 'gothic-24-bold',
-	text: 5,
+	text: app.configs.gram,
 	textAlign: 'left',
 	color: '#333333'
 });
@@ -69,89 +75,85 @@ app.choicesElement = new UI.Text({
 	position: new Vector2(-23, 75),
 	size: new Vector2(144, 30),
 	font: 'gothic-24-bold',
-	text: 0,
+	text: app.configs.choice,
 	textAlign: 'right',
 	color: '#333333'
 });
 
-addElements(window, app);
-
-var gram = 5;
-var choice = 0;
-
-function updateChoices(gram) {
+app.updateChoices(gram) {
 	if( gram >= 0 && gram <= 5 ){
-		choicesElement.text(0);
+		app.choicesElement.text(0);
 
 	} else if( gram > 5 && gram <= 10) {
-		choicesElement.text(0.5);
+		app.choicesElement.text(0.5);
 
 	} else if(gram > 10 && gram <= 20) {
-		choicesElement.text(1);
+		app.choicesElement.text(1);
 
 	} else if(gram > 20 && gram <= 25) {
-		choicesElement.text(1.5);
+		app.choicesElement.text(1.5);
 
 	} else if(gram > 25 && gram <= 35) {
-		choicesElement.text(2);
+		app.choicesElement.text(2);
 
 	} else if(gram > 35 && gram <= 40) {
-		choicesElement.text(2.5);
+		app.choicesElement.text(2.5);
 
 	} else if(gram > 40 && gram <= 50) {
-		choicesElement.text(3);
+		app.choicesElement.text(3);
 
 	} else if(gram > 50 && gram <= 55) {
-		choicesElement.text(3.5);
+		app.choicesElement.text(3.5);
 
 	} else if(gram > 55 && gram <= 65) {
-		choicesElement.text(4);
+		app.choicesElement.text(4);
 
 	} else if(gram > 65 && gram <= 70) {
-		choicesElement.text(4.5);
+		app.choicesElement.text(4.5);
 
 	} else if(gram > 70 && gram <= 80) {
-		choicesElement.text(5);
+		app.choicesElement.text(5);
 
 	} else if(gram > 80 && gram <= 85) {
-		choicesElement.text(5.5);
+		app.choicesElement.text(5.5);
 
 	} else if(gram > 85 && gram <= 95) {
-		choicesElement.text(6);
+		app.choicesElement.text(6);
 
 	} else if(gram > 95 && gram <= 100) {
-		choicesElement.text(6.5);
+		app.choicesElement.text(6.5);
 
 	} else {
-		choicesElement.text(7);
+		app.choicesElement.text(7);
 
 	}
 }
 
+addElements(window, app);
+
+var gram = app.configs.gram;
+var choice = app.configs.choice;
+
 window.on('longClick', 'select', function() {
 	gram = 5;
-	gramsElement.text(5);
-
-
+	app.gramsElement.text(5);
 	updateChoices(gram);
 });
 
 window.on('click', 'up', function(e) {
-	gramsElement.text(gram+=1);
-
+	app.gramsElement.text(gram+=1);
 	updateChoices(gram);
 
 });
 
 window.on('longClick', 'up', function() {
-	gramsElement.text(gram+=5);
-
+	app.gramsElement.text(gram+=5);
 	updateChoices(gram);
 });
 
 window.on('click', 'down', function() {
 	if(gram > 0) {
-		gramsElement.text(gram-=1);
+		app.gramsElement.text(gram-=1);
 
 		updateChoices(gram);
 	}
@@ -159,8 +161,7 @@ window.on('click', 'down', function() {
 
 window.on('longClick', 'down', function() {
 	if(gram > 0 && gram > 5) {
-		gramsElement.text(gram-=5);
-
+		app.gramsElement.text(gram-=5);
 		updateChoices(gram);
 	}
 });
