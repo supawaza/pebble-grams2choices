@@ -6,6 +6,11 @@ var UI = require('ui');
 var Vector2 = require('vector2');
 var window = new UI.Window();
 
+var configs = {
+	gram: 5,
+	choice, 0
+};
+
 var addElements = function(win, obj) {
 	for (var key in obj) {
   		if (obj.hasOwnProperty(key)) {
@@ -80,51 +85,53 @@ addElements(window, app);
 var gram = 5;
 var choice = 0;
 
-function updateChoices(gram) {
+var updateChoices = function(gram, textLabel) {
+	var textElement = app.choicesElement;
+
 	if( gram >= 0 && gram <= 5 ){
-		app.choicesElement.text(0);
+		textElement.text(0);
 
 	} else if( gram > 5 && gram <= 10) {
-		app.choicesElement.text(0.5);
+		textElement.text(0.5);
 
 	} else if(gram > 10 && gram <= 20) {
-		app.choicesElement.text(1);
+		textElement.text(1);
 
 	} else if(gram > 20 && gram <= 25) {
-		app.choicesElement.text(1.5);
+		textElement.text(1.5);
 
 	} else if(gram > 25 && gram <= 35) {
-		app.choicesElement.text(2);
+		textElement.text(2);
 
 	} else if(gram > 35 && gram <= 40) {
-		app.choicesElement.text(2.5);
+		textElement.text(2.5);
 
 	} else if(gram > 40 && gram <= 50) {
-		app.choicesElement.text(3);
+		textElement.text(3);
 
 	} else if(gram > 50 && gram <= 55) {
-		app.choicesElement.text(3.5);
+		textElement.text(3.5);
 
 	} else if(gram > 55 && gram <= 65) {
-		app.choicesElement.text(4);
+		textElement.text(4);
 
 	} else if(gram > 65 && gram <= 70) {
-		app.choicesElement.text(4.5);
+		textElement.text(4.5);
 
 	} else if(gram > 70 && gram <= 80) {
-		app.choicesElement.text(5);
+		textElement.text(5);
 
 	} else if(gram > 80 && gram <= 85) {
-		app.choicesElement.text(5.5);
+		textElement.text(5.5);
 
 	} else if(gram > 85 && gram <= 95) {
-		app.choicesElement.text(6);
+		textElement.text(6);
 
 	} else if(gram > 95 && gram <= 100) {
-		app.choicesElement.text(6.5);
+		textElement.text(6.5);
 
 	} else {
-		app.choicesElement.text(7);
+		textElement.text(7);
 
 	}
 }
