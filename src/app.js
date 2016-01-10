@@ -6,7 +6,7 @@ var UI = require('ui');
 var Vector2 = require('vector2');
 var window = new UI.Window();
 
-//Simple function to add UI elements to the Pebble window
+//Add UI elements to the Pebble window
 var addElements = function(win, obj) {
 	for (var key in obj) {
   		if (obj.hasOwnProperty(key)) {
@@ -32,7 +32,7 @@ var configs = {
 var app = {};
 
 //App Title Text
-app.titleText = new UI.Text({
+app.elements.titleText = new UI.Text({
 	position: new Vector2(0, 5),
 	size: new Vector2(150, 40),
 	font: 'gothic-24-bold',
@@ -96,59 +96,60 @@ app.choicesElement = new UI.Text({
 });
 
 //Add elements onto the Pebble window
-addElements(window, app);
+addElements(window, app.elements);
 
-var gram = configs.initGram,
-	choice = configs.initChoice;
+var gram = configs.initGram;
 
 app.updateChoices = function(gram) {
-	var textElement = this.choicesElement;
+	var updatedChoice = 0;
 
 	if( gram >= 0 && gram <= 5 ){
-		textElement.text(0);
+		updatedChoice = 0;
 
 	} else if( gram > 5 && gram <= 10) {
-		textElement.text(0.5);
+		updatedChoice = 0.5;
 
 	} else if(gram > 10 && gram <= 20) {
-		textElement.text(1);
+		updatedChoice = 1;
 
 	} else if(gram > 20 && gram <= 25) {
-		textElement.text(1.5);
+		updatedChoice = 1.5;
 
 	} else if(gram > 25 && gram <= 35) {
-		textElement.text(2);
+		updatedChoice = 2;
 
 	} else if(gram > 35 && gram <= 40) {
-		textElement.text(2.5);
+		updatedChoice = 2.5;
 
 	} else if(gram > 40 && gram <= 50) {
-		textElement.text(3);
+		updatedChoice = 3;
 
 	} else if(gram > 50 && gram <= 55) {
-		textElement.text(3.5);
+		updatedChoice = 3.5;
 
 	} else if(gram > 55 && gram <= 65) {
-		textElement.text(4);
+		updatedChoice = 4;
 
 	} else if(gram > 65 && gram <= 70) {
-		textElement.text(4.5);
+		updatedChoice = 4.5;
 
 	} else if(gram > 70 && gram <= 80) {
-		textElement.text(5);
+		updatedChoice = 5;
 
 	} else if(gram > 80 && gram <= 85) {
-		textElement.text(5.5);
+		updatedChoice = 5.5;
 
 	} else if(gram > 85 && gram <= 95) {
-		textElement.text(6);
+		updatedChoice = 6;
 
 	} else if(gram > 95 && gram <= 100) {
-		textElement.text(6.5);
+		updatedChoice = 6.5;
 
 	} else {
-		textElement.text(7);
+		updatedChoice = 7;
 	}
+
+	this.choicesElement.text(updatedChoice);
 };
 
 /*  EVENTS
