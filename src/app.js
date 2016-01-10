@@ -32,7 +32,7 @@ var configs = {
 var app = {};
 
 //App Title Text
-app.elements.titleText = new UI.Text({
+app.titleText = new UI.Text({
 	position: new Vector2(0, 5),
 	size: new Vector2(150, 40),
 	font: 'gothic-24-bold',
@@ -96,7 +96,7 @@ app.choicesElement = new UI.Text({
 });
 
 //Add elements onto the Pebble window
-addElements(window, app.elements);
+addElements(window, app);
 
 var gram = configs.initGram;
 
