@@ -17,16 +17,16 @@ var addElements = function(win, obj) {
 };
 
 var configs = {
-	initGram: 5,
+	gramLongIncrement: 5,
+	gramShortIncrement: 1,
 	initChoice: 0,
+	initGram: 5,
+	images: ['images/white_arrows.png']
 	numbersTextFont: 'gothic-24-bold',
 	numbersTextColor: '#333333',
-	gramShortIncrement: 1,
-	gramLongIncrement: 5,
 	staticTextFont: 'gothic-18-bold',
 	staticTextColor: 'green',
 	textBg: '#a5eab7',
-	images: ['images/white_arrows.png']
 };
 
 var app = {};
